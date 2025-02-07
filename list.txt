@@ -1,7 +1,7 @@
 ! Title: Hide YouTube Shorts
 ! Description: Hide all traces of YouTube shorts videos on YouTube
-! Version: 1.10.0
-! Last modified: 2024-08-31 19:24
+! Version: 1.9.0
+! Last modified: 2024-02-17 11:55
 ! Expires: 2 weeks (update frequency)
 ! Homepage: https://github.com/gijsdev/ublock-hide-yt-shorts
 ! License: https://github.com/gijsdev/ublock-hide-yt-shorts/blob/master/LICENSE.md
@@ -24,9 +24,9 @@ www.youtube.com##ytd-guide-entry-renderer:has(yt-formatted-string:has-text(/^Sho
 ! Tablet resolution
 www.youtube.com##ytd-mini-guide-entry-renderer:has(.title:has-text(/^Shorts$/i))
 
-! Hide shorts sections except on history page
-www.youtube.com##:matches-path(/^(?!\/feed\/history).*$/)ytd-rich-section-renderer:has(#title:has-text(/(^| )Shorts( |$)/i))
-www.youtube.com##:matches-path(/^(?!\/feed\/history).*$/)ytd-reel-shelf-renderer:has(.ytd-reel-shelf-renderer:has-text(/(^| )Shorts( |$)/i))
+! Hide shorts section on homepage
+www.youtube.com##ytd-rich-section-renderer:has(#title:has-text(/(^| )Shorts( |$)/i))
+www.youtube.com##ytd-reel-shelf-renderer:has(.ytd-reel-shelf-renderer:has-text(/(^| )Shorts( |$)/i))
 
 ! Hide shorts tab on channel pages`
 ! Old style
@@ -34,8 +34,8 @@ www.youtube.com##tp-yt-paper-tab:has(.tp-yt-paper-tab:has-text(Shorts))
 ! New style (2023-10)
 www.youtube.com##yt-tab-shape:has-text(/^Shorts$/)
 
-! Hide short remixes in video descriptions and in suggestions beside the comments
-www.youtube.com##ytd-reel-shelf-renderer:has(#title:has-text(/(^| )Shorts.?Remix.*$/i))
+! Hide short remixes in video descriptions
+www.youtube.com##ytd-reel-shelf-renderer.ytd-structured-description-content-renderer:has-text(/^Shorts remixing this video$/i)
 
 ! Hide shorts category on homepage and search pages
 www.youtube.com##yt-chip-cloud-chip-renderer:has(yt-formatted-string:has-text(/^Shorts$/i))
@@ -54,9 +54,9 @@ m.youtube.com##ytm-pivot-bar-item-renderer:has(.pivot-shorts)
 ! Hide all videos with the shorts indicator on the thumbnail
 m.youtube.com##ytm-video-with-context-renderer:has([data-style="SHORTS"])
 
-! Hide shorts sections except on history page
-m.youtube.com##:matches-path(/^(?!\/feed\/history).*$/)ytm-rich-section-renderer:has(.reel-shelf-title-wrapper .yt-core-attributed-string:has-text(/(^| )Shorts( |$)/i))
-m.youtube.com##:matches-path(/^(?!\/feed\/history).*$/)ytm-reel-shelf-renderer.item:has(.reel-shelf-title-wrapper .yt-core-attributed-string:has-text(/(^| )Shorts( |$)/i))
+! Hide shorts sections
+m.youtube.com##ytm-rich-section-renderer:has(.reel-shelf-title-wrapper .yt-core-attributed-string:has-text(/(^| )Shorts( |$)/i))
+m.youtube.com##ytm-reel-shelf-renderer.item:has(.reel-shelf-title-wrapper .yt-core-attributed-string:has-text(/(^| )Shorts( |$)/i))
 
 ! Hide shorts tab on channel pages
 ! Old style
@@ -64,9 +64,17 @@ m.youtube.com##.single-column-browse-results-tabs>a:has-text(Shorts)
 ! New style (2023-10)
 m.youtube.com##yt-tab-shape:has-text(/^Shorts$/)
 
-! Hide short remixes in video descriptions and in suggestions below the player
-m.youtube.com##ytm-reel-shelf-renderer:has(.reel-shelf-title-wrapper .yt-core-attributed-string:has-text(/(^| )Shorts.?Remix.*$/i))
+! Hide short remixes in video descriptions
+m.youtube.com##ytm-reel-shelf-renderer:has(.reel-shelf-title-wrapper .yt-core-attributed-string:has-text(/^Shorts remixing this video$/i))
 
 ! Hide shorts category on homepage
-m.youtube.com##ytm-chip-cloud-chip-renderer:has(.yt-core-attributed-string:has-text(/^Shorts$/i))
+! Old hide shorts category on homepage by gijsdev https://github.com/gijsdev
 
+! m.youtube.com##ytm-chip-cloud-chip-renderer:has(.yt-core-attributed-string:has-text(/^Shorts$/i))
+
+
+! Hide shorts category on homepage
+! New hide shorts category on homepage by CheemsGalaxy https://github.com/CheemsGalaxy
+
+www.youtube.com##.YtdRichGridGroupContents:style(display: none !important)
+www.youtube.com##.YtdRichGridGroupHost:style(display: none !important)
